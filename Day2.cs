@@ -5,8 +5,14 @@ public static class Day2
     {
         return input
             .Select(line => new Game(line))
-            .Where(g => g.Possible)
             .Sum(g => g.Id);
+    }
+
+    public static long Part2(string[] input)
+    {
+        return input
+            .Select(line => new Game(line))
+            .Sum(g => g.MaxGreens * g.MaxReds * g.MaxBlues);
     }
 }
 
@@ -32,7 +38,7 @@ public class Game
     {
         return line
             .Select((c, index) =>
-            c == color ? int.Parse(line.Substring(index - 3, 2)) : -1)
+            c == color && line[index-1] == ' ' ? int.Parse(line.Substring(index - 3, 2)) : -1)
             .Where(item => item != -1)
             .Max();
     }
