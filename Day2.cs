@@ -5,6 +5,7 @@ public static class Day2
     {
         return input
             .Select(line => new Game(line))
+            .Where(g => g.Possible)
             .Sum(g => g.Id);
     }
 
